@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Minimal example</title>
+    <style type="text/css">
+        body {
+            color: #5d5d5d;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+		
+		.mapael .map {
+            margin-bottom: 10px;
+            position: relative;
+        }
+		
+		.mapael .mapTooltip {
+            position: absolute;
+            background-color: #fff;
+            moz-opacity: 0.70;
+            opacity: 0.70;
+            filter: alpha(opacity=70);
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 1000;
+            max-width: 200px;
+            display: none;
+            color: #343434;
+        }
+		
+		/* For all zoom buttons */
+        .mapael .zoomButton {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            color: #000;
+            width: 15px;
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border-radius: 3px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            font-weight: bold;
+            left: 10px;
+
+            -webkit-user-select: none;
+            -khtml-user-select : none;
+            -moz-user-select: none;
+            -o-user-select : none;
+            user-select: none;
+        }
+
+        /* Reset Zoom button first */
+        .mapael .zoomReset {
+            top: 10px;
+        }
+
+        /* Then Zoom In button */
+        .mapael .zoomIn {
+            top: 30px;
+        }
+
+        /* Then Zoom Out button */
+        .mapael .zoomOut {
+            top: 50px;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
+            charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" charset="utf-8"></script>
+    <script src="../../js/jquery.mapael.js" charset="utf-8"></script>
+    <script src="../../js/maps/france_departments.js" charset="utf-8"></script>
+    <script src="../../js/maps/world_countries.js" charset="utf-8"></script>
+    <script src="../../js/maps/usa_states.js" charset="utf-8"></script>
+    <script src="../../js/maps/european_union.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".mapcontainer").mapael({
+                map: {
+                    // Set the name of the map to display
+                    name: "european_union",
+					// Set default plots and areas style
+                    defaultPlot: {
+                        attrs: {
+                            fill: "#004a9b"
+                            , opacity: 0.6
+                        }
+                        , attrsHover: {
+                            opacity: 1
+                        }
+                        , text: {
+                            attrs: {
+                                fill: "#505444"
+                            }
+                            , attrsHover: {
+                                fill: "#000"
+                            }
+                        }
+                    },
+					defaultArea: {
+                        attrs: {
+                            stroke: "#fff",
+                            "stroke-width": 1
+                        },
+                        attrsHover: {
+                            "stroke-width": 2
+                        }
+                    },
+					zoom: {
+                        enabled: true,
+						step: 0.25,
+                        maxLevel: 20
+                    }
+                },
+				legend: {
+                    area: {
+                        title: "Population of France by department",
+                        slices: [
+                            {
+                                max: 300000,
+                                attrs: {
+                                    fill: "#97e766"
+                                },
+                                label: "Less than de 300 000 inhabitants"
+                            },
+                            {
+                                min: 300000,
+                                max: 500000,
+                                attrs: {
+                                    fill: "#7fd34d"
+                                },
+                                label: "Between 100 000 and 500 000 inhabitants"
+                            },
+                            {
+                                min: 500000,
+                                max: 1000000,
+                                attrs: {
+                                    fill: "#5faa32"
+                                },
+                                label: "Between 500 000 and 1 000 000 inhabitants"
+                            },
+                            {
+                                min: 1000000,
+                                attrs: {
+                                    fill: "#3f7d1a"
+                                },
+                                label: "More than 1 million inhabitants"
+                            }
+                        ]
+                    }
+                },
+				areas: {
+					"FR": {
+						value: "2617939",
+						href: "#",
+						tooltip: {content: "<span style=\"font-weight:bold;\">Nord (59)</span><br />Population : 2617939"}
+					}
+				}
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Minimal example</h1>
+
+    <div class="mapcontainer">
+        <div class="map">
+            <span>Alternative content for the map</span>
+        </div>
+    </div>
+
+    <p><b>All example for jQuery Mapael are available <a href="https://www.vincentbroute.fr/mapael/">here</a>.</b></p>
+
+</div>
+
+
+</body>
+</html>
